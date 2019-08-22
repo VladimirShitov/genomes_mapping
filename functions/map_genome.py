@@ -7,7 +7,7 @@ TEMP_PATH = constants.TEMP_PATH
 DB_PATH = constants.DB_PATH
 
 
-def map_genome(genome, reference, save_alignment=True):  # TODO: document save_alignment()
+def map_genome(genome, reference, save_alignment=True):
     """Run BLAST search and return dataframe with well aligned genes.
 
     Parameters

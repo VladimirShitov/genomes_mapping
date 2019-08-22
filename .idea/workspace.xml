@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42123182-c935-4973-8607-017b64e94626" name="Default Changelist" comment="" />
+    <list default="true" id="42123182-c935-4973-8607-017b64e94626" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/get_gene_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions/get_gene_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/map_genome.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions/map_genome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +122,7 @@
       <updated>1566270911919</updated>
       <workItem from="1566270919910" duration="20555000" />
       <workItem from="1566367759097" duration="11876000" />
-      <workItem from="1566436933262" duration="295000" />
+      <workItem from="1566436933262" duration="1031000" />
     </task>
     <servers />
   </component>

@@ -7,14 +7,15 @@ from tqdm import tqdm  # progress bar
 from Blast_Database import BlastDatabase
 from Genome import Genome
 from functions.map_genome import map_genome
+import constants
 
-Entrez.email = 'vladimirs@intern.bii.a-star.edu.sg'
+Entrez.email = constants.EMAIL
 
-GENOMES_DIR = '/home/vladimir/Documents/E_coli/seqs_mapping/'
-TEMP_PATH = '/home/vladimir/Documents/E_coli/_temp_2/temp'
-LOG_PATH = '/home/vladimir/Documents/E_coli/all_genomes_mapping_2.log'
-DB_PATH = '/home/vladimir/Documents/E_coli/blastdb_2/'
-REFERENCE = 'GCF_000005845.2_ASM584v2'
+GENOMES_DIR = constants.GENOMES_DIR
+TEMP_PATH = constants.TEMP_PATH
+LOG_PATH = constants.LOG_PATH
+DB_PATH = constants.DB_PATH
+REFERENCE = constants.REFERENCE
 
 # Get all directories in GENOMES_DIR
 folders = list(filter(lambda x: os.path.isdir(GENOMES_DIR + x), os.listdir(GENOMES_DIR)))

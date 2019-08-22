@@ -1,8 +1,10 @@
 import pandas as pd
 from Bio.Blast.Applications import NcbiblastpCommandline
 
-TEMP_PATH = '/home/vladimir/Documents/E_coli/_temp_2/temp'
-DB_PATH = '/home/vladimir/Documents/E_coli/blastdb_2/'
+import constants
+
+TEMP_PATH = constants.TEMP_PATH
+DB_PATH = constants.DB_PATH
 
 
 def map_genome(genome, reference):

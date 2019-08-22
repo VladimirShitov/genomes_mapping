@@ -1,6 +1,8 @@
 from Bio import Entrez
 
-Entrez.email = 'vladimirs@intern.bii.a-star.edu.sg'
+import constants
+
+Entrez.email = constants.EMAIL
 
 
 def get_gene_info(gene_id):

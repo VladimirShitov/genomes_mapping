@@ -126,8 +126,13 @@ class Genome:
             self.raised_errors = True
             self.log += 'Cannot get feature_table\n'
 
-    def read_protein_faa(self, filename=None):  # TODO: document `filename` parameter
+    def read_protein_faa(self, filename=None):
         """Read protein.faa in a `self.folder_path`. Save list of Gene() objects in `self.genes`.
+
+        Parameters
+        ----------
+        filename : str
+            Path to a file with protein sequence. If not set, `self.files['protein.faa']` will be used.
 
         Examples
         --------
@@ -212,8 +217,15 @@ class Genome:
 
         return start, end
 
-    def set_gene_positions(self, from_fasta=False):  # TODO: document `from_fasta`
-        """Set `start` and `end` for each gene in `self.genes`. Required `self.feature_table` read."""
+    def set_gene_positions(self, from_fasta=False):
+        """Set `start` and `end` for each gene in `self.genes`.
+
+        Parameters
+        ----------
+        from_fasta : bool
+            If False, requires `self.feature_table` read. If True, information will be searched in `self.info`.
+
+        """
         if from_fasta:
             params = ['start:', 'end:', 'genome:']
             for gene in self.genes:
@@ -238,7 +250,8 @@ class Genome:
             if gene.id == gene_id:
                 return gene
 
-    def write_genes_to_file(self, path):  # TODO: document
+    def write_genes_to_file(self, path):
+        """Create file with `self.genes` in fasta format."""
         with open(path, 'w') as f:
             for gene in self.genes:
                 f.write(gene.get_fasta())

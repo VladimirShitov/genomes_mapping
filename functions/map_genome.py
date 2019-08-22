@@ -16,6 +16,8 @@ def map_genome(genome, reference, save_alignment=True):  # TODO: document save_a
         An object of Genome() class, which `genes` will be searched against reference genome
     reference : Genome
         An object of Genome() class, which `genes` are needed to get exact positions of database genes.
+    save_alignment : bool
+        If True, good alignments will be saved to alignment_df and return. If False, return None instead of alignment_df
 
     Returns
     -------
@@ -33,13 +35,14 @@ def map_genome(genome, reference, save_alignment=True):  # TODO: document save_a
         [9]  db_gene_end
         [10] E_value
         [11] bit_score
+        If `save_alignment` is False, alignment_df will not be created and None will be returned.
     not_aligned_genes : set
         Set with genes, which didn't have good enough BLAST hit.
     """
     mapping_list = []
     not_aligned_genes = set()
 
-    genome.write_genes_to_file(TEMP_PATH)
+    genome.write_genes_to_file(TEMP_PATH)  # TODO: probably, it can be done without temp file
 
     cline = NcbiblastpCommandline(query=TEMP_PATH,
                                   db='{}cur_db'.format(DB_PATH),

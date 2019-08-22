@@ -2,7 +2,7 @@ import os
 from tqdm import tqdm  # Progress bar
 
 from Genome import Genome
-from functions import map_genome
+from functions.map_genome import map_genome
 import constants
 
 DB_PATH = constants.DB_PATH
@@ -12,7 +12,7 @@ LOG_PATH = constants.ALIGNMENT_LOG
 
 def align_to_database():
 
-    reference = Genome(folder_path=DB_PATH, folder_prefix='')
+    reference = Genome(folder_path=DB_PATH, files_prefix='')
     reference.read_protein_faa(filename=DB_PATH+'current_db.faa')
     reference.set_gene_positions(from_fasta=True)
 
@@ -21,31 +21,27 @@ def align_to_database():
     log = open(LOG_PATH, 'w', buffering=1)
 
     for folder in tqdm(folders):
-        try:
-            prefix = folder + '_'
 
-            log.write('Working with {}\n'.format(GENOMES_DIR + folder))
-            genome = Genome(folder_path=GENOMES_DIR+folder+'/', files_prefix=prefix)
-            genome.read_protein_faa()
-            genome.read_feature_table()
-            genome.set_gene_positions()
+        prefix = folder + '_'
 
-            log.write('Created genome\n')
+        log.write('Working with {}\n'.format(GENOMES_DIR + folder))
+        genome = Genome(folder_path=GENOMES_DIR+folder+'/', files_prefix=prefix)
+        genome.read_protein_faa()
+        genome.read_feature_table()
+        genome.set_gene_positions()
 
-            if genome.raised_errors:
-                log.write('ERROR\n{}\n'.format(genome.log))
-                log.close()
-                raise Exception(genome.log)
+        log.write('Created genome\n')
 
-            log.write('Mapping genomes...\n')
-            alignment_df, not_aligned = map_genome(genome, reference, save_alignment=False)
-            log.write('Mapping is done. df.shape: {},  not aligned genes: {}\n'.format(alignment_df.shape,
-                                                                                       not_aligned))
+        if genome.raised_errors:
+            log.write('ERROR\n{}\n'.format(genome.log))
+            log.close()
+            raise Exception(genome.log)
 
-            alignment_df.to_csv(GENOMES_DIR + folder + '/db_alignment.csv', index=False)
+        log.write('Mapping genomes...\n')
+        alignment_df, not_aligned = map_genome(genome, reference, save_alignment=True)
+        log.write('Mapping is done. df.shape: {},  not aligned genes: {}\n'.format(alignment_df.shape,
+                                                                                   not_aligned))
 
-        except Exception as e:
-            log.write(str(e) + '\n')
-            continue
+        alignment_df.to_csv(GENOMES_DIR + folder + '/db_alignment.csv', index=False)
 
     log.close()

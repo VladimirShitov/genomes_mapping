@@ -10,7 +10,7 @@ class BlastDatabase:
     def feed_genes(self, genes):
         self.genes.extend(genes)
 
-    def create_db(self, append=False, path='.'):
+    def create_db(self, append=False, path='.'):  # TODO: is it possible to add files to db without recreating it?
         flag = 'a' if append else 'w'
 
         with open(path + 'current_db.faa', flag) as f:

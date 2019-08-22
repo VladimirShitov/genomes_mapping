@@ -38,10 +38,14 @@ class Genome:
         Return `folder_path` and `files_prefix` of a genome
     get_gene_by_id(gene_id)
          Get gene, which `id` is the same as `gene_id` parameter.
+<<<<<<< HEAD
     set_gene_positions()
          Set `start` and `end` for each gene in `self.genes`. Requires `self.feature_table` read.
     write_genes_to_file(path)
         Create a file and write all genes sequences in fasta format in it.
+=======
+     set_gene_positions()
+         Sets `start` and `end` for each gene in `self.genes`. Requires `self.feature_table` read.
 
     """
 
@@ -218,8 +222,7 @@ class Genome:
             if gene.id == gene_id:
                 return gene
 
-    def write_genes_to_file(self, path):
-        """Create a file and write all genes sequences in fasta format in it."""
+    def write_genes_to_file(self, path):  # TODO: document
         with open(path, 'w') as f:
             for gene in self.genes:
                 f.write(gene.get_fasta())

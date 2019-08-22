@@ -7,7 +7,7 @@ TEMP_PATH = constants.TEMP_PATH
 DB_PATH = constants.DB_PATH
 
 
-def map_genome(genome, reference):
+def map_genome(genome, reference, save_alignment=True):  # TODO: document save_alignment()
     """Run BLAST search and return dataframe with well aligned genes.
 
     Parameters
@@ -19,7 +19,7 @@ def map_genome(genome, reference):
 
     Returns
     -------
-    df : pandas.DataFrame
+    alignment_df : pandas.DataFrame
         Data frame with following columns:
         [0]  query_gene - id of a gene from `genome`, which had a good enough BLAST hit
         [1]  db_gene - id of a gene from `reference`, on which query_gene has aligned
@@ -59,15 +59,16 @@ def map_genome(genome, reference):
             if float(cols[2]) > 50:  # Basic identity threshold. TODO: change to a parameter
                 found.add(gene)
 
-                query_gene = genome.get_gene_by_id(cols[0])
-                db_gene = reference.get_gene_by_id(cols[1])
+                if save_alignment:
+                    query_gene = genome.get_gene_by_id(cols[0])
+                    db_gene = reference.get_gene_by_id(cols[1])
 
-                cols[6] = query_gene.start
-                cols[7] = query_gene.end
-                cols[8] = db_gene.start
-                cols[9] = db_gene.end
+                    cols[6] = query_gene.start
+                    cols[7] = query_gene.end
+                    cols[8] = db_gene.start
+                    cols[9] = db_gene.end
 
-                mapping_list.append(cols)
+                    mapping_list.append(cols)
     else:
         raise Exception('Blast failed')
 
@@ -75,8 +76,12 @@ def map_genome(genome, reference):
         if gene.id not in found:
             not_aligned_genes.add(gene.id)
 
-    return (pd.DataFrame(mapping_list, columns=['query_gene', 'db_gene', 'identity',
-                                                'alignment_length', 'mismatches', 'gap_opens',
-                                                'query_start', 'query_end', 'db_gene_start',
-                                                'db_gene_end', 'E_value', 'bit_score']),
-            not_aligned_genes)
+    if save_alignment:
+        alignment_df = pd.DataFrame(mapping_list, columns=['query_gene', 'db_gene', 'identity',
+                                                           'alignment_length', 'mismatches', 'gap_opens',
+                                                           'query_start', 'query_end', 'db_gene_start',
+                                                           'db_gene_end', 'E_value', 'bit_score'])
+    else:
+        alignment_df = None
+
+    return alignment_df, not_aligned_genes

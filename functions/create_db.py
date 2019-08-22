@@ -59,11 +59,8 @@ def create_database():
                     reference = genome
 
                 log.write('Mapping genomes...\n')
-                alignment_list, not_aligned = map_genome(genome, reference)
-                log.write('Mapping is done. Shape of dataframe: {}, not aligned genes: {}\n'.format(alignment_list.shape,
-                                                                                                    len(not_aligned)))
-
-                alignment_list.to_csv(GENOMES_DIR + folder + '/alignment_list.csv', index=False)
+                _, not_aligned = map_genome(genome, reference, save_alignment=False)
+                log.write('Mapping is done. Not aligned genes: {}\n'.format(len(not_aligned)))
 
                 # We have to add new genes to reference, so we could always know their positions.
                 reference.genes.extend([genome[gene] for gene in not_aligned])

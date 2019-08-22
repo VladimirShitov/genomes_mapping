@@ -5,9 +5,9 @@ from Genome import Genome
 from functions.map_genome import map_genome
 import constants
 
-DB_PATH = constants.DB_PATH
-GENOMES_DIR = constants.GENOMES_DIR
-LOG_PATH = constants.ALIGNMENT_LOG
+DB_PATH = '../' + constants.DB_PATH
+GENOMES_DIR = '../' + constants.GENOMES_DIR
+LOG_PATH = '../' + constants.ALIGNMENT_LOG
 
 
 def align_to_database():

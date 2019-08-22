@@ -3,8 +3,8 @@ from Bio.Blast.Applications import NcbiblastpCommandline
 
 import constants
 
-TEMP_PATH = constants.TEMP_PATH
-DB_PATH = constants.DB_PATH
+TEMP_PATH = '../' + constants.TEMP_PATH
+DB_PATH = '../' + constants.DB_PATH
 
 
 def map_genome(genome, reference, save_alignment=True):

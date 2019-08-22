@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 def clean_alignment(df, identity_threshold=50):

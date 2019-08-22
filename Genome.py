@@ -126,7 +126,7 @@ class Genome:
             self.raised_errors = True
             self.log += 'Cannot get feature_table\n'
 
-    def read_protein_faa(self):
+    def read_protein_faa(self, filename=None):  # TODO: document `filename` parameter
         """Read protein.faa in a `self.folder_path`. Save list of Gene() objects in `self.genes`.
 
         Examples
@@ -144,8 +144,9 @@ class Genome:
         MKRISTTITTTITITTGNGAG
 
         """
+        filename = filename if filename else self.files['protein.faa']
         try:
-            with open(self.files['protein.faa'], 'r') as f:
+            with open(filename, 'r') as f:
                 genes = f.read()
             genes = [x for x in genes.split('>') if x != '']
 
@@ -211,10 +212,25 @@ class Genome:
 
         return start, end
 
-    def set_gene_positions(self):
+    def set_gene_positions(self, from_fasta=False):  # TODO: document `from_fasta`
         """Set `start` and `end` for each gene in `self.genes`. Required `self.feature_table` read."""
-        for gene in self.genes:
-            gene.start, gene.end = self.get_gene_positions(gene=gene)
+        if from_fasta:
+            params = ['start:', 'end:', 'genome:']
+            for gene in self.genes:
+                for param in params:
+                    param_start = gene.info.find(param)
+                    param_end = gene.info[param_start:].find(']')
+                    info = gene.info[param_start + len(param):param_start + param_end]
+
+                    if param == 'start:':
+                        gene.start = info
+                    elif param == 'end:':
+                        gene.end = info
+                    elif param == 'genome:':
+                        gene.genome = info
+        else:
+            for gene in self.genes:
+                gene.start, gene.end = self.get_gene_positions(gene=gene)
 
     def get_gene_by_id(self, gene_id):
         """Get gene, which `id` is the same as `gene_id` parameter."""

@@ -6,6 +6,7 @@ from tqdm import tqdm  # progress bar
 
 import constants
 from functions.create_db import create_database
+from functions.align_to_db import align_to_database
 
 Entrez.email = constants.EMAIL
 
@@ -15,4 +16,4 @@ LOG_PATH = constants.LOG_PATH
 DB_PATH = constants.DB_PATH
 REFERENCE = constants.REFERENCE
 
-create_database()
+align_to_database()

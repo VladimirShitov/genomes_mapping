@@ -24,7 +24,6 @@ def create_database():
 
     log = open(LOG_PATH, 'w', buffering=1)
     db_sizes = []
-
     blast_db = BlastDatabase()
 
     for i, folder in enumerate(tqdm(folders)):

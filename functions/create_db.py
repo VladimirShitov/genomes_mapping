@@ -8,10 +8,10 @@ from Blast_Database import BlastDatabase
 from functions.map_genome import map_genome
 import constants
 
-GENOMES_DIR = constants.GENOMES_DIR
+GENOMES_DIR = '../' + constants.GENOMES_DIR
 REFERENCE = constants.REFERENCE
-DB_PATH = constants.DB_PATH
-LOG_PATH = constants.DB_LOG
+DB_PATH = '../' + constants.DB_PATH
+LOG_PATH = '../' + constants.DB_LOG
 
 
 def create_database():
@@ -77,18 +77,15 @@ def create_database():
 
                 log.write('End of the iteration\n\n')
 
-                if i % 5 == 0 or i == len(folders) - 1:
-                    plt.plot(db_sizes)  # TODO: save to ../plots/*.png
+                if i % 10 == 5 or i == len(folders) - 1:
+                    plt.plot(db_sizes)
                     plt.title('Size of database')
-                    plt.show()
+                    plt.xlabel('Number of genomes')
+                    plt.ylabel('Number of genes in database')
+                    plt.savefig('../plots/database_size.png')
 
         except Exception as e:
             log.write(str(e) + '\n')
             continue
 
-    plt.plot(db_sizes)
-    plt.title('Size of the database')
-    plt.xlabel('Number of genomes')
-    plt.ylabel('Number of genes in database')
-    plt.savefig('./plots/database_size.png')
     log.close()

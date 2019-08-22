@@ -53,7 +53,7 @@ def map_genome(genome, reference, save_alignment=True):  # TODO: document save_a
     found = set()
 
     if len(stdout) > 1:
-        results = stdout.split('\n')[:-1]
+        results = stdout.rstrip().split('\n')
 
         for result in results:
             cols = result.split('\t')

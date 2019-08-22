@@ -16,4 +16,6 @@ LOG_PATH = constants.LOG_PATH
 DB_PATH = constants.DB_PATH
 REFERENCE = constants.REFERENCE
 
+
+create_database()
 align_to_database()

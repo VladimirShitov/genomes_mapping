@@ -54,8 +54,12 @@ def create_database():
                 if folder == REFERENCE:  # The very first run
                     blast_db.feed_genes(genome.genes)
                     blast_db.create_db(append=False, path=DB_PATH)
-
                     reference = genome
+
+                    log.write('Created database from {} genes of reference\n'.format(len(blast_db.genes)))
+                    db_sizes.append(len(blast_db.genes))
+
+                    continue
 
                 log.write('Mapping genomes...\n')
                 _, not_aligned = map_genome(genome, reference, save_alignment=False)
@@ -73,7 +77,7 @@ def create_database():
 
                 log.write('End of the iteration\n\n')
 
-                if i % 10 == 5 or i == len(folders) - 1:
+                if i % 5 == 0 or i == len(folders) - 1:
                     plt.plot(db_sizes)  # TODO: save to ../plots/*.png
                     plt.title('Size of database')
                     plt.show()

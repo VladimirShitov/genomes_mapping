@@ -15,7 +15,7 @@ class BlastDatabase:
 
         with open(path + 'current_db.faa', flag) as f:
             for gene in self.genes[self.written_to_a_file:]:
-                f.write(str(gene) + '\n')
+                f.write(str(gene))
 
         self.written_to_a_file += len(self.genes[self.written_to_a_file:])
 

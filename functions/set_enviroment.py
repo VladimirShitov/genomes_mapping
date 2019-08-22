@@ -1,7 +1,7 @@
 import os
 
 
-def set_enviroment():
+def set_enviroment():  # TODO: document
 
     os.makedirs('data', exist_ok=True)
     os.makedirs('plots', exist_ok=True)

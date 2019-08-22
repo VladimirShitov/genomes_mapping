@@ -2,7 +2,7 @@ import os
 
 import matplotlib.pyplot as plt
 from Bio import Entrez
-from tqdm import tqdm
+from tqdm import tqdm  # progress bar
 
 from Blast_Database import BlastDatabase
 from Genome import Genome
@@ -28,7 +28,6 @@ db_sizes = []
 blast_db = BlastDatabase()
 
 for i, folder in enumerate(tqdm(folders)):
-
     try:
         prefix = folder + '_'
         has_feature_table = (prefix + 'feature_table.txt') in os.listdir(GENOMES_DIR + folder)
@@ -54,7 +53,6 @@ for i, folder in enumerate(tqdm(folders)):
                 raise Exception(genome.log)
 
             if folder == REFERENCE:  # The very first run
-
                 blast_db.feed_genes(genome.genes)
                 blast_db.create_db(append=False, path=DB_PATH)
 
@@ -65,15 +63,14 @@ for i, folder in enumerate(tqdm(folders)):
             log.write('Mapping is done. Shape of dataframe: {}, not aligned genes: {}\n'.format(alignment_list.shape,
                                                                                                 len(not_aligned)))
 
-            # alignment_list.to_csv(GENOMES_DIR + folder + '/alignment_list.csv', index=False)
-
-            blast_db.feed_genes([genome[gene] for gene in not_aligned])
-            log.write('Updated database. Size now: {}\n'.format(len(blast_db.genes)))
+            alignment_list.to_csv(GENOMES_DIR + folder + '/alignment_list.csv', index=False)
 
             # We have to add new genes to reference, so we could always know their positions.
             reference.genes.extend([genome[gene] for gene in not_aligned])
 
             if not_aligned:
+                blast_db.feed_genes([genome[gene] for gene in not_aligned])
+                log.write('Updated database. Size now: {}\n'.format(len(blast_db.genes)))
                 blast_db.create_db(append=True, path=DB_PATH)
 
             db_sizes.append(len(blast_db.genes))
@@ -86,7 +83,6 @@ for i, folder in enumerate(tqdm(folders)):
                 plt.show()
 
     except Exception as e:
-        log.write(str(e))
-        log.write('\n')
+        log.write(str(e) + '\n')
         continue
 log.close()

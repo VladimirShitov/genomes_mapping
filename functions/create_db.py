@@ -11,7 +11,7 @@ import constants
 GENOMES_DIR = constants.GENOMES_DIR
 REFERENCE = constants.REFERENCE
 DB_PATH = constants.DB_PATH
-LOG_PATH = constants.LOG_PATH
+LOG_PATH = constants.DB_LOG
 
 
 def create_database():

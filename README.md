@@ -48,6 +48,22 @@ Directory tree after work of the pipeline will look like this (except for .py fi
 ```
 
 ## download_genomes.py
-Downloads *assembly_summary.txt* from NCBI ftp-site. For example, for Escherichia coli the file will be downloaded from 
-[that page](ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/Escherichia_coli/). If you want to use another organism, 
-please set it's name to **ORGANISM** constant in *./constants.py*
+Downloads *assembly_summary.txt* from NCBI ftp-site to *./data* folder. For example, for Escherichia coli the file will be downloaded from ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/Escherichia_coli/ . 
+If you want to use another organism, please set it's name to **ORGANISM** constant in *./constants.py*. (Note: in that case you will also have to set assembly id of the reference organism to a **REFERENCE** constant)
+
+Then, only assemblies with **assembly_level** "Complete Genome" or "Chromosome" are selected. For each of them 
+the following files will be downloaded:
+* **protein.faa.gz** - contains amino acid sequences.
+* **feature_table.txt.gz** - contains information about genes, i.e, *start* and *end* in a genome.
+* **genomic.fna.gz** - complete nucleotide sequence of a genome.
+* **protein.gpff.gz** - protein sequence and annotation for each gene.
+Then all the files are extracted from their archives.
+
+Information about the work process of a function is being written to a *./logs/downloading.log*.
+
+## create_db.py
+From all of the protein sequences of every genome creates a list of such sequences, that any pair of sequences from that list
+has **identity < 50%**. Following algorithm is used for each genome (by "genome" I understand folder in *./data*)
+starting from reference:
+1. If genome doens't have *feature_table.txt* or *protein.faa* files, delete the whole folder.
+2. Else perform a BLAST search for each gene against the genes in database (for the first run with reference database is empty). If a gene doesn't have BLAST hit with **E value > 0.001** and **identity > 50%**, add this gene to the database.

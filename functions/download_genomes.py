@@ -3,6 +3,7 @@ import subprocess as sp
 
 import numpy as np
 import pandas as pd
+from tqdm import tqdm  # Progress bar
 
 import constants
 
@@ -23,7 +24,7 @@ def download_genomes():
 
     is_downloaded = np.zeros(assembly.shape[0], dtype=bool)
 
-    for i, link in enumerate(assembly['ftp_path']):
+    for i, link in enumerate(tqdm(assembly['ftp_path'])):
 
         if link == '-' or is_downloaded[i]:
             log.write('No link found\n')

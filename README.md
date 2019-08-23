@@ -78,7 +78,7 @@ Imagine, that algorithm met the gene *A* first. Then later genes *B* and *C* wil
 
 ![Illustration 2](/images/2.png)
 
-Now imagine, that algorithm met the gene *B* first. Then later the gene *A* will align on it well and **will not be added** to the database. That means, that gene *C* **will be added** to the database too.
+Now imagine, that algorithm met the gene *C* first. Then later the gene *A* will align on it well and **will not be added** to the database. That means, that gene *B* **will be added** to the database too. The same is true for situation when algorithm meets gene *B* first.
 
 ![Illustration 3](/images/3.png)
 

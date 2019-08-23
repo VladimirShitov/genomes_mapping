@@ -1,6 +1,6 @@
 numpy
 seaborn
 pandas
-Bio
+biopython
 tqdm
 matplotlib

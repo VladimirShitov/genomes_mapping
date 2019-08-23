@@ -67,3 +67,15 @@ has **identity < 50%**. Following algorithm is used for each genome (by "genome"
 starting from reference:
 1. If genome doens't have *feature_table.txt* or *protein.faa* files, delete the whole folder.
 2. Else perform a BLAST search for each gene against the genes in database (for the first run with reference database is empty). If a gene doesn't have BLAST hit with **E value > 0.001** and **identity > 50%**, add this gene to the database.
+
+In the end we will get blast protein database with *cur_db* prefix and list of all genes *"current_db.faa" in *./blastdb* folder.
+
+Note, that number of genes in database doen't fully represent number of unique genes of the organism. Imagine following situation: 3 genes *A*, *B* and *C*, such that *A* identity with *B* and with *C* > 50%, but identity of *B* and *C* is less than 50%.
+![Illustration 1](/images/1.png)
+Imagine, that algorithm met the gene *A* first. Then later genes *B* and *C* will align on it well enough, and **won't be added** to the database.
+![Illustration 2](/images/2.png)
+Now imagine, that algorithm met the gene *B* first. Then later the gene *A* will align on it well and **will not be added** to the database. That means, that gene *C* **will be added** to the database too.
+![Illustration 3](/images/3.png)
+This means, that we will need to align all the genes on database genes later. Then we could define **gene** as a linked component in obtained graph. But we will have to be careful with situations like this:
+![Illustration 4](/images/4.png)
+Do *A* and *X* represent the same gene?

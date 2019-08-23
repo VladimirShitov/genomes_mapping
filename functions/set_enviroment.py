@@ -6,6 +6,9 @@ def set_enviroment():
 
     Directory tree after work of the pipeline will look like this (except for .py files):
     .
+    ├── blastdb
+    │   ├── cur_db.* - blast database files
+    │   ├── current_db.faa - list of genes in database in fasta format
     ├── data - folder where all the genomes and output files will be saved
     │   ├── assembly_summary.txt - table with all organism assemblies from refseq.
     │   ├── GCF_000005845.2_ASM584v2 - folder with files for that assembly

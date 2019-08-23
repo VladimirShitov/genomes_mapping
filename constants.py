@@ -1,5 +1,5 @@
 FTP_LINK = 'ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/'
-ORGANISM = 'Escherichia_coli'  # TODO: make a parameter to generalise the pipeline
+ORGANISM = 'Escherichia_coli'  # TODO: make a parameter to generalize the pipeline
 REFERENCE = 'GCF_000005845.2_ASM584v2'
 
 DB_PATH = './blast_db'

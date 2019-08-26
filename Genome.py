@@ -217,7 +217,7 @@ class Genome:
 
         return start, end
 
-    def set_gene_positions(self, from_fasta=False):
+    def set_gene_positions(self, from_fasta=False):  # TODO: this works ages! Do something
         """Set `start` and `end` for each gene in `self.genes`.
 
         Parameters

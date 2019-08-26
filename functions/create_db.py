@@ -14,7 +14,7 @@ DB_PATH = constants.DB_PATH
 LOG_PATH = constants.DB_LOG
 
 
-def create_database():
+def create_database():  # TODO: remove blast's log from a console
 
     # Get all directories in GENOMES_DIR
     folders = list(filter(lambda x: os.path.isdir(GENOMES_DIR + x), os.listdir(GENOMES_DIR)))

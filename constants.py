@@ -3,7 +3,7 @@ ORGANISM = 'Escherichia_coli'  # TODO: make a parameter to generalize the pipeli
 REFERENCE = 'GCF_000005845.2_ASM584v2'
 
 DB_PATH = './blast_db'
-GENOMES_DIR = './data'
+GENOMES_DIR = './data/'
 TEMP_PATH = './temp'
 
 LOG_PATH = './logs/pipeline.log'

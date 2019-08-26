@@ -82,7 +82,7 @@ def create_database():
                     plt.title('Size of database')
                     plt.xlabel('Number of genomes')
                     plt.ylabel('Number of genes in database')
-                    plt.savefig('../plots/database_size.png')
+                    plt.savefig('./plots/database_size.png')
 
         except Exception as e:
             log.write(str(e) + '\n')

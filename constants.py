@@ -11,5 +11,7 @@ DOWNLOADING_LOG = './logs/downloading.log'
 DB_LOG = './logs/database.log'
 ALIGNMENT_LOG = './logs/alignment.log'
 
+THRESHOLD = 50
+
 
 EMAIL = 'vladimirs@intern.bii.a-star.edu.sg'

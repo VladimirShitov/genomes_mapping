@@ -5,6 +5,7 @@ import constants
 
 TEMP_PATH = '../' + constants.TEMP_PATH
 DB_PATH = '../' + constants.DB_PATH
+THRESHOLD = constants.THRESHOLD
 
 
 def map_genome(genome, reference, save_alignment=True):
@@ -59,7 +60,7 @@ def map_genome(genome, reference, save_alignment=True):
             cols = result.split('\t')
             gene = cols[0]
 
-            if float(cols[2]) > 50:  # Basic identity threshold. TODO: change to a parameter
+            if float(cols[2]) > THRESHOLD:  # Basic identity threshold. TODO: change to a parameter
                 found.add(gene)
 
                 if save_alignment:

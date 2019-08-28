@@ -3,7 +3,6 @@ from Bio.Blast.Applications import NcbiblastpCommandline
 
 import constants
 
-TEMP_PATH = constants.TEMP_PATH
 DB_PATH = constants.DB_PATH
 THRESHOLD = constants.THRESHOLD
 
@@ -43,9 +42,7 @@ def map_genome(genome, reference, save_alignment=True):
     mapping_list = []
     not_aligned_genes = set()
 
-    genome.write_genes_to_file(TEMP_PATH)  # TODO: probably, it can be done without temp file
-
-    cline = NcbiblastpCommandline(query=TEMP_PATH,
+    cline = NcbiblastpCommandline(query=genome.files['protein.faa'],
                                   db='{}cur_db'.format(DB_PATH),
                                   evalue=0.001,
                                   outfmt=6,  # tab-separated

@@ -82,6 +82,13 @@ def map_genome(genome, reference, save_alignment=True):
                                                            'alignment_length', 'mismatches', 'gap_opens',
                                                            'query_start', 'query_end', 'db_gene_start',
                                                            'db_gene_end', 'E_value', 'bit_score'])
+        
+        alignment_df['identity'] = alignment_df['identity'].astype(np.float32)
+        alignment_df['query_start'] = alignment_df['query_start'].astype(np.int32)
+        alignment_df['query_end'] = alignment_df['query_end'].astype(np.int32)
+        alignment_df['db_gene_start'] = alignment_df['db_gene_start'].astype(np.int32)
+        alignment_df['db_gene_end'] = alignment_df['db_gene_end'].astype(np.int32)
+        
     else:
         alignment_df = None
 

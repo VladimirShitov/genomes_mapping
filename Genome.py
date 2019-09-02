@@ -255,3 +255,29 @@ class Genome:
         with open(path, 'w') as f:
             for gene in self.genes:
                 f.write(gene.get_fasta())
+
+    def read_genomic_fna(self, filename=None):  # TODO: document
+        filename = filename if filename else self.files['genomic.fna']
+        
+        try:
+            with open(filename, 'r') as f:
+                sequence = f.read()
+            sequence = ''.join(sequence.split('\n')[1:])  # Split the first string with info
+            self.sequence = sequence  
+        except FileNotFoundError:
+            self.raised_errors = True
+            self.log += 'Cannot get genomic.fna\n'
+    
+    def set_nucleotide_sequences_to_genes(self):  # TODO: document
+        for gene in self.genes:
+            start = gene.start - 1  # String indexes start with 0
+            end = gene.end  # String slice doesn't include end, so that's ok
+            gene.nucleotide_sequence = self.sequence[start:end]
+            
+    def set_everything(self):  # TODO: document
+        self.read_feature_table()
+        self.read_protein_faa()
+        self.set_gene_positions()
+        self.read_genomic_fna()
+        self.set_nucleotide_sequences_to_genes()
+    

@@ -9,7 +9,9 @@ class Gene:
         Any additional information about the gene. Usually part of a fasta file after a gene name, but
         before sequence.
     sequence : str
-        Nucleotide or aminoacid sequence of a gene.
+        Aminoacid sequence of a gene.
+    nucleotide_sequence : str
+        Nucleotide sequence of a gene.
 
     Methods
     -------
@@ -39,6 +41,7 @@ class Gene:
         self.genome = genome
         self.start = None
         self.end = None
+        self.nucleotide_sequence = None
 
     def __repr__(self):
         """Return `self.get_fasta()` output."""

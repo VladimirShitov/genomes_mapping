@@ -12,21 +12,18 @@ try:
     download_genomes()
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
-    log.close()
 
 try:
     log.write('Creating database. More details in {}\n'.format(constants.DB_LOG))
     create_database()
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
-    log.close()
 
 try:
     log.write('Aligning genes to database. More details in {}\n'.format(constants.ALIGNMENT_LOG))
     align_to_database()
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
-    log.close()
 
 # build_graph()
 

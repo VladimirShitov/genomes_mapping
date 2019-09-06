@@ -46,7 +46,8 @@ def map_genome(genome, reference, save_alignment=True):
                                   db='{}cur_db'.format(DB_PATH),
                                   evalue=0.001,
                                   outfmt=6,  # tab-separated
-                                  num_threads=7)
+                                  num_threads=7,
+                                  max_target_seqs=3000)
     stdout, stderr = cline()
     found = set()
 

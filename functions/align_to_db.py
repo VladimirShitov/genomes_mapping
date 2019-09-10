@@ -39,7 +39,7 @@ def align_to_database():
 
         log.write('Mapping genomes...\n')
         alignment_df, not_aligned = map_genome(genome, reference, save_alignment=True)
-        log.write('Mapping is done. df.shape: {},  not aligned genes: {}\n'.format(alignment_df.shape,
+        log.write('Mapping is done. df.shape: {},  not aligned genes: {}\n\n'.format(alignment_df.shape,
                                                                                    not_aligned))
 
         alignment_df.to_csv(GENOMES_DIR + folder + '/db_alignment.csv', index=False)

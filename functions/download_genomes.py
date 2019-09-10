@@ -27,7 +27,7 @@ def download_genomes():
     for i, link in enumerate(tqdm(assembly['ftp_path'])):
 
         if link == '-' or is_downloaded[i]:
-            log.write('No link found\n')
+            log.write('No link found or the genome is downloaded already\n')
             log.write('End of the iteration. {}/{} done\n\n'.format(i + 1, assembly.shape[0]))
             continue
 

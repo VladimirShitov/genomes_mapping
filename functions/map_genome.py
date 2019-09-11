@@ -36,6 +36,8 @@ def map_genome(genome, reference, save_alignment=True):
         [9]  db_gene_end
         [10] E_value
         [11] bit_score
+        [12] query_genome - assembly number of a genome
+        [13] db_genome
         If `save_alignment` is False, alignment_df will not be created and None will be returned.
     not_aligned_genes : set
         Set with genes, which didn't have good enough BLAST hit.
@@ -70,6 +72,8 @@ def map_genome(genome, reference, save_alignment=True):
                     cols[7] = query_gene.end
                     cols[8] = db_gene.start
                     cols[9] = db_gene.end
+                    cols.append(query_gene.genome)
+                    cols.append(db_gene.genome)
 
                     mapping_list.append(cols)
     else:
@@ -83,7 +87,8 @@ def map_genome(genome, reference, save_alignment=True):
         alignment_df = pd.DataFrame(mapping_list, columns=['query_gene', 'db_gene', 'identity',
                                                            'alignment_length', 'mismatches', 'gap_opens',
                                                            'query_start', 'query_end', 'db_gene_start',
-                                                           'db_gene_end', 'E_value', 'bit_score'])
+                                                           'db_gene_end', 'E_value', 'bit_score',
+                                                           'query_genome', 'db_genome'])
         
         alignment_df['identity'] = alignment_df['identity'].astype(np.float32)
         alignment_df['query_start'] = alignment_df['query_start'].astype(np.int32)

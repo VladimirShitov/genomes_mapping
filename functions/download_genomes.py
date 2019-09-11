@@ -13,6 +13,21 @@ LOG_PATH = constants.DOWNLOADING_LOG
 
 
 def download_genomes():
+    """Download files for a given organism from NCBI ftp-website.
+    
+    1. Download 'assembly_summary.txt' file for a given organism (in constants.ORGANISM)
+    This file contains tab-separated table with genomes information and link to files for each assembly
+    2. From downloaded table keep only rows, which contain 'Complete Genome' or 'Chromosome' in 'assembly_level' column
+    3. For each of the rest assemblies create folder with a name of assembly
+    4. To assembly folder download following files:
+        * protein.faa.gz - all proteins sequences
+        * feature_table.txt.gz - some information about genes
+        * genomic.fna.gz - genome nucleotide sequence
+        * protein.gpff.gz - extra information
+    5. Extract the archives
+    
+    Information about the process is writen to DOWNLOADING_LOG file in constants. Function itself works in ./data folder
+    """
 
     log = open(LOG_PATH, 'w', buffering=1)
 

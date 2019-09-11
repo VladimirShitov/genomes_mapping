@@ -19,7 +19,7 @@ def download_genomes():
     This file contains tab-separated table with genomes information and link to files for each assembly
     2. From downloaded table keep only rows, which contain 'Complete Genome' or 'Chromosome' in 'assembly_level' column
     3. For each of the rest assemblies create folder with a name of assembly
-    4. To assembly folder download following files:
+    4. Download following files to each assembly folder:
         * protein.faa.gz - all proteins sequences
         * feature_table.txt.gz - some information about genes
         * genomic.fna.gz - genome nucleotide sequence

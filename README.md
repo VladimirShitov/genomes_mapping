@@ -29,6 +29,7 @@ Creates subdirectories needed for the other steps of the pipeline.
 Directory tree after work of the pipeline will look like this (except for .py files):
 ```bash
     .
+    ├── blastdb – folder where the BLAST database will be saved
     ├── data – folder where all the genomes and output files will be saved
     │   ├── assembly_summary.txt – table with all organism assemblies from refseq
     │   ├── GCF_000005845.2_ASM584v2 – folder with files for that assembly

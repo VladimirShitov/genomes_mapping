@@ -15,7 +15,7 @@ LOG_PATH = constants.DOWNLOADING_LOG
 def download_genomes():
     """Download files for a given organism from NCBI ftp-website.
     
-    1. Download 'assembly_summary.txt' file for a given organism (in constants.ORGANISM)
+    1. Download 'assembly_summary.txt' file for a given organism (in constants.ORGANISM).
     This file contains tab-separated table with genomes information and link to files for each assembly
     2. From downloaded table keep only rows, which contain 'Complete Genome' or 'Chromosome' in 'assembly_level' column
     3. For each of the rest assemblies create folder with a name of assembly

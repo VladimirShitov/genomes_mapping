@@ -5,6 +5,8 @@ REFERENCE = 'GCF_000005845.2_ASM584v2'
 DB_PATH = './blast_db/'
 GENOMES_DIR = './data/'
 TEMP_PATH = './temp'
+CD_HIT_PATH = 'cd-hit'
+PROTEOME_PATH = './data/proteome.faa'
 
 LOG_PATH = './logs/pipeline.log'
 DOWNLOADING_LOG = './logs/downloading.log'

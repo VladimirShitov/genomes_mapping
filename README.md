@@ -29,7 +29,7 @@ Creates subdirectories needed for the other steps of the pipeline.
 Directory tree after work of the pipeline will look like this (except for .py files):
 ```bash
     .
-    ├── blastdb – folder where the BLAST database will be saved
+    ├── cd_hit – folder with cd-hit results
     ├── data – folder where all the genomes and output files will be saved
     │   ├── assembly_summary.txt – table with all organism assemblies from refseq
     │   ├── GCF_000005845.2_ASM584v2 – folder with files for that assembly
@@ -75,15 +75,15 @@ In the end we will get blast protein database with *cur_db* prefix and list of a
 
 The number of genes in database doesn't fully represent number of unique genes of the organism. Imagine following situation: 3 genes *A*, *B* and *C*, such that *A* identity with *B* and with *C* > 50%, but identity of *B* and *C* is less than 50%.
 
-![Illustration 1](/images/1.png)
+![Illustration 1](./images/1.png)
 
 Imagine, that algorithm met the gene *A* first. Then later genes *B* and *C* will align on it well enough, and **won't be added** to the database. The size of the database will be equal to **1**.
 
-![Illustration 2](/images/2.png)
+![Illustration 2](./images/2.png)
 
 Now imagine, that algorithm met the gene *C* first. Then later the gene *A* will align on it well and **will not be added** to the database. That means, that gene *B* **will be added** to the database too. The same is true for situation when algorithm meets gene *B* first. The size of the database will be equal to **2**.
 
-![Illustration 3](/images/3.png)
+![Illustration 3](./images/3.png)
 
 This means, that we need to align all the genes on the ready database to restore the links. This is exactly, what *align_to_db.py* does. For each genome it runs BLAST against database made by *create_db.py*. Results of mapping are saved to **db_alignment.csv** in the folder of each genome. These are dataframes with the following columns:
     [0]  query_gene - id of a gene from `genome`, which had a good enough BLAST hit

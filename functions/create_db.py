@@ -38,7 +38,6 @@ def create_database():  # TODO: remove blast's log from a console
                 os.system('rm -rf {}'.format(GENOMES_DIR + folder))
                 continue
 
-
             log.write('Working with {}\n'.format(GENOMES_DIR + folder))
             genome = Genome(folder_path=GENOMES_DIR + folder + '/', files_prefix=prefix)
             genome.read_protein_faa()

@@ -280,4 +280,3 @@ class Genome:
         self.set_gene_positions()
         self.read_genomic_fna()
         self.set_nucleotide_sequences_to_genes()
-    

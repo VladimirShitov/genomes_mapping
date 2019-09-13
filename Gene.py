@@ -47,8 +47,14 @@ class Gene:
         """Return `self.get_fasta()` output."""
         return self.get_fasta()
 
-    def get_fasta(self):
+    def get_fasta(self, join_genome_to_name=False):
         """Return string with a gene in fasta format.
+
+        Parameters
+        ----------
+        join_genome_to_name : bool
+            If True, append [genome: `self.genome`] to gene id in fasta header. It may be useful if you need to
+            differ 2 genes with the same name but from different genomes.
 
         Returns
         -------
@@ -58,8 +64,12 @@ class Gene:
             ">`self.id` `self.info` [start:`self.start`] [end:`self.end`] [genome: `self.genome`]
             `self.sequence`"
         """
+        gene_id = self.id
+        if join_genome_to_name:
+            gene_id += '[genome:{}] '.format(self.genome)
+
         return ('>'
-                + self.id
+                + gene_id
                 + ' '
                 + self.info
                 + ' '

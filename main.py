@@ -1,30 +1,30 @@
 from functions.set_enviroment import set_enviroment
 from functions.download_genomes import download_genomes
-from functions.create_db import create_database
-from functions.align_to_db import align_to_database
-import constants
+from functions.create_proteome import create_proteome
+from functions.perform_cd_hit_clustering import perform_cd_hit_clustering
+
+from constants import LOG_PATH, DOWNLOADING_LOG, THRESHOLD
 
 set_enviroment()
-log = open(constants.LOG_PATH, 'w', buffering=1)
+log = open(LOG_PATH, 'w', buffering=1)
 
 try:
-    log.write('Downloading genomes. More details in {}\n'.format(constants.DOWNLOADING_LOG))
+    log.write('Downloading genomes. More details in {}\n'.format(DOWNLOADING_LOG))
     download_genomes()
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
 
 try:
-    log.write('Creating database. More details in {}\n'.format(constants.DB_LOG))
-    create_database()
+    log.write('Trying to create proteome\n')
+    create_proteome()
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
 
 try:
-    log.write('Aligning genes to database. More details in {}\n'.format(constants.ALIGNMENT_LOG))
-    align_to_database()
+    log.write('Trying to perform CD-hit clustering\n')
+    perform_cd_hit_clustering(THRESHOLD)
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
 
-# build_graph()
 
 log.close()

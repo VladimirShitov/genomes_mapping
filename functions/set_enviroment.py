@@ -6,9 +6,7 @@ def set_enviroment():
 
     Directory tree after work of the pipeline will look like this (except for .py files):
     .
-    ├── blastdb
-    │   ├── cur_db.* - blast database files
-    │   ├── current_db.faa - list of genes in database in fasta format
+    ├── cd_hit - folder with cd-hit results
     ├── data - folder where all the genomes and output files will be saved
     │   ├── assembly_summary.txt - table with all organism assemblies from refseq.
     │   ├── GCF_000005845.2_ASM584v2 - folder with files for that assembly
@@ -27,7 +25,7 @@ def set_enviroment():
     └── plots - folder with graphs
 
     """
-    os.makedirs('blast_db', exist_ok=True)
+    os.makedirs('cd_hit', exist_ok=True)
     os.makedirs('data', exist_ok=True)
     os.makedirs('plots', exist_ok=True)
     os.makedirs('logs', exist_ok=True)

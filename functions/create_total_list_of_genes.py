@@ -8,11 +8,16 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from functions.perform_cd_hit_clustering import perform_cd_hit_clustering
-from constants import THRESHOLD, CLUSTERS_INFO, TEMP_PATH, TOTAL_LIST_PATH
+from constants import THRESHOLD, CLUSTERS_INFO, TEMP_PATH, TOTAL_LIST_PATH, TOTAL_LIST_LOG
 
 
 def create_total_list_of_genes():  # TODO: document
+
+    log = open(TOTAL_LIST_LOG, 'w', buffering=1)
+
+    log.write('Performing CD-hit clustering\n')
     clusters_df = perform_cd_hit_clustering(THRESHOLD)
+    log.write('Done. Shape of a dataframe: {}'.format(clusters_df.shape))
 
     clusters_sizes = clusters_df['cluster'].value_counts()
 
@@ -52,6 +57,7 @@ def create_total_list_of_genes():  # TODO: document
     total_list = pd.DataFrame(data=None, columns=COLS)
     temp_df = pd.DataFrame(data=None, columns=COLS)
 
+    log.write('Creating a total list')
     for i, cluster in enumerate(tqdm(filtered_clusters.keys())):
         cluster_genomes = np.array(clusters_df[clusters_df['cluster'] == cluster]['genome'])
         genes_in_genome = defaultdict(int)
@@ -70,3 +76,6 @@ def create_total_list_of_genes():  # TODO: document
 
     total_list = pd.concat([total_list, temp_df], axis=0, ignore_index=True, sort=False)
     total_list.to_csv(TOTAL_LIST_PATH, index=False)
+    log.write('Done. Shape of a dataframe: {}'.format(total_list.shape))
+
+    log.close()

@@ -16,9 +16,11 @@ def read_cd_hit_output(path):
         DataFrame with following columns:
         1. 'cluster' — cluster of a sequence
         2. 'representative' — boolean variable, which indicates, if the given sequence is representative in the cluster
-        3. 'gene' — name of the sequence from fasta header
+        3. 'gene' — name of the sequence from fasta header with appended genome id
         4. 'length' — length of the gene's sequence
         5. 'identity' — identity of a sequence to representative sequence of its cluster
+        6. 'name' — name of the sequence from fasta header without appended genome id
+        7. 'genome' — genome id from fasta header
     """
     clusters = []
 
@@ -40,5 +42,16 @@ def read_cd_hit_output(path):
     clusters = pd.DataFrame(data=clusters, columns=['cluster', 'representative', 'gene', 'length', 'identity'])
     clusters['identity'] = clusters['identity'].astype(np.float32)
     clusters['length'] = clusters['length'].astype(np.int32)
+
+    gene_names = []
+    genomes = []
+
+    for gene in np.array(clusters['gene']):
+        sep = gene.find('[')
+        gene_names.append(gene[:sep])
+        genomes.append(gene[sep + len('[genome:'):-1])
+
+    clusters['name'] = gene_names
+    clusters['genome'] = genomes
 
     return clusters

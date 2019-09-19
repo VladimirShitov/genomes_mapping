@@ -22,4 +22,4 @@ def create_proteome():
             genome.set_gene_positions()
 
             for gene in genome.genes:
-                f.write(gene.get_fasta())
+                f.write(gene.get_fasta(join_genome_to_name=True))

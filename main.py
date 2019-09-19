@@ -1,7 +1,7 @@
 from functions.set_enviroment import set_enviroment
 from functions.download_genomes import download_genomes
 from functions.create_proteome import create_proteome
-from functions.perform_cd_hit_clustering import perform_cd_hit_clustering
+from functions.get_total_list_of_genes import get_total_list_of_genes
 
 from constants import LOG_PATH, DOWNLOADING_LOG, THRESHOLD
 
@@ -21,8 +21,8 @@ except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
 
 try:
-    log.write('Trying to perform CD-hit clustering\n')
-    perform_cd_hit_clustering(THRESHOLD)
+    log.write('Trying to create total list of genes\n')
+    get_total_list_of_genes()
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
 

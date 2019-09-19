@@ -3,7 +3,7 @@ import pandas as pd
 
 
 def read_cd_hit_output(path):
-    """Create table from cd-hit output file.
+    """Create and return table from cd-hit output file.
 
     Parameters
     ----------

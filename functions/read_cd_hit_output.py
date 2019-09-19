@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from constants import GENES_INFO_PATH
+
 
 def read_cd_hit_output(path):
     """Create and return table from cd-hit output file.
@@ -21,6 +23,7 @@ def read_cd_hit_output(path):
         5. 'identity' — identity of a sequence to representative sequence of its cluster
         6. 'name' — name of the sequence from fasta header without appended genome id
         7. 'genome' — genome id from fasta header
+        8. 'info' — information about gene from its fasta header
     """
     clusters = []
 
@@ -53,5 +56,17 @@ def read_cd_hit_output(path):
 
     clusters['name'] = gene_names
     clusters['genome'] = genomes
+
+    # TODO: make it less stupid
+    genes_info = pd.read_csv(GENES_INFO_PATH, sep='\t')
+    info = {}
+    for row in genes_info.itertuples(index=False):
+        info[row.gene] = row.info
+
+    # Sort in the same way as in clusters df
+    info_for_df = []
+    for gene in clusters['gene']:
+        info_for_df.append(info[gene])
+    clusters['info'] = info_for_df
 
     return clusters

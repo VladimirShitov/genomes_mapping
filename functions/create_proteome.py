@@ -2,7 +2,7 @@ import os
 
 from Genome import Genome
 
-from constants import PROTEOME_PATH, GENOMES_DIR
+from constants import PROTEOME_PATH, GENOMES_DIR, GENES_INFO_PATH
 
 
 def create_proteome():
@@ -11,15 +11,20 @@ def create_proteome():
     # Get all directories in GENOMES_DIR
     folders = list(filter(lambda x: os.path.isdir(GENOMES_DIR + x), os.listdir(GENOMES_DIR)))
 
-    with open(PROTEOME_PATH, 'a') as f:
+    with open(PROTEOME_PATH, 'a') as proteome:
+        with open(GENES_INFO_PATH, 'a') as genes_info:
+            genes_info.write('gene\tgenome\tinfo')
 
-        for folder in folders:
-            prefix = folder + '_'
+            for folder in folders:
+                prefix = folder + '_'
 
-            genome = Genome(GENOMES_DIR+folder, prefix)
-            genome.read_protein_faa()
-            genome.read_feature_table()
-            genome.set_gene_positions()
+                genome = Genome(GENOMES_DIR+folder, prefix)
+                genome.read_protein_faa()
+                genome.read_feature_table()
+                genome.set_gene_positions()
 
-            for gene in genome.genes:
-                f.write(gene.get_fasta(join_genome_to_name=True))
+                for gene in genome.genes:
+                    proteome.write(gene.get_fasta(join_genome_to_name=True))
+                    genes_info.write('{gene}[genome: {genome}]\t{info}'.format(gene=gene.id,
+                                                                               genome=gene.genome,
+                                                                               info=gene.info))

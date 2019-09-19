@@ -10,6 +10,9 @@ GENOMES_DIR = './data/'
 TEMP_PATH = './temp'
 CD_HIT_PATH = 'cd-hit'
 PROTEOME_PATH = './data/proteome.faa'
+GENES_INFO_PATH = './data/genes_info.tsv'
+CLUSTERS_INFO = './data/cluster_info.json'
+TOTAL_LIST_PATH = './data/total_list.csv'  # TODO: maybe it is better to create a separate folder for results
 
 LOG_PATH = './logs/pipeline.log'
 DOWNLOADING_LOG = './logs/downloading.log'

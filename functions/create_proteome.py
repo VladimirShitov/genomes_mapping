@@ -1,5 +1,7 @@
 import os
 
+from tqdm import tqdm
+
 from Genome import Genome
 
 from constants import PROTEOME_PATH, GENOMES_DIR, GENES_INFO_PATH, PROTEOME_LOG
@@ -17,7 +19,7 @@ def create_proteome():
         with open(GENES_INFO_PATH, 'a') as genes_info:
             genes_info.write('gene\tgenome\tinfo')
 
-            for folder in folders:
+            for folder in tqdm(folders):
                 log.write('Working with folder {}\n'.format(folder))
 
                 prefix = folder + '_'

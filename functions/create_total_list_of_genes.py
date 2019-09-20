@@ -19,31 +19,10 @@ def create_total_list_of_genes():  # TODO: document
     clusters_df = perform_cd_hit_clustering(THRESHOLD)
     log.write('Done. Shape of a dataframe: {}'.format(clusters_df.shape))
 
-    clusters_sizes = clusters_df['cluster'].value_counts()
-
-    size_threshold = int(0.02*clusters_sizes[-1])  # 2% smallest clusters
-    filtered_clusters = {cluster: clusters_sizes[cluster] for cluster in clusters_sizes
-                         if clusters_sizes[cluster] > size_threshold}
-
-    # Save distribution of clusters sizes
-    plt.figure(figsize=(10, 3))
-
-    plt.subplot(121)
-    sns.distplot(clusters_sizes, kde=False)
-    plt.title('Distribution of sizes of {} clusters'.format(len(clusters_sizes)))
-    plt.xlabel('Size of a cluster')
-    plt.ylabel('Number of clusters')
-
-    plt.subplot(122)
-    sns.distplot(list(filtered_clusters.values()), kde=False)
-    plt.title('Clusters, which size > {}, sizes distribution'.format(size_threshold))
-    plt.xlabel('Size of a cluster')
-    plt.ylabel('Number of clusters')
-
-    plt.savefig('./plots/clusters_sizes.png')
+    clusters = set(clusters_df['cluster'])
 
     clusters_info = {}
-    for cluster in filtered_clusters.keys():
+    for cluster in clusters:
         all_info = Counter(clusters_df[clusters_df['cluster'] == cluster]['info'])
         cluster_info = all_info.most_common(1)[0][0]  # The name of most common element
         clusters_info[cluster] = cluster_info
@@ -58,7 +37,7 @@ def create_total_list_of_genes():  # TODO: document
     temp_df = pd.DataFrame(data=None, columns=COLS)
 
     log.write('Creating a total list')
-    for i, cluster in enumerate(tqdm(filtered_clusters.keys())):
+    for i, cluster in enumerate(tqdm(clusters)):
         cluster_genomes = np.array(clusters_df[clusters_df['cluster'] == cluster]['genome'])
         genes_in_genome = defaultdict(int)
 
@@ -76,6 +55,6 @@ def create_total_list_of_genes():  # TODO: document
 
     total_list = pd.concat([total_list, temp_df], axis=0, ignore_index=True, sort=False)
     total_list.to_csv(TOTAL_LIST_PATH, index=False)
-    log.write('Done. Shape of a dataframe: {}'.format(total_list.shape))
+    log.write('Done. Shape of the total list: {}'.format(total_list.shape))
 
     log.close()

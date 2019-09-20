@@ -19,5 +19,6 @@ DOWNLOADING_LOG = './logs/downloading.log'
 DB_LOG = './logs/database.log'
 ALIGNMENT_LOG = './logs/alignment.log'
 TOTAL_LIST_LOG = './logs/total_list.log'
+PROTEOME_LOG = './logs/proteome.log'
 
 THRESHOLD = 90

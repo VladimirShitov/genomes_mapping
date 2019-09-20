@@ -2,11 +2,13 @@ import os
 
 from Genome import Genome
 
-from constants import PROTEOME_PATH, GENOMES_DIR, GENES_INFO_PATH
+from constants import PROTEOME_PATH, GENOMES_DIR, GENES_INFO_PATH, PROTEOME_LOG
 
 
 def create_proteome():
     """Create one file with protein sequences from all the genomes in data folder"""
+
+    log = open(PROTEOME_LOG, 'w', buffering=1)
 
     # Get all directories in GENOMES_DIR
     folders = list(filter(lambda x: os.path.isdir(GENOMES_DIR + x), os.listdir(GENOMES_DIR)))
@@ -16,6 +18,8 @@ def create_proteome():
             genes_info.write('gene\tgenome\tinfo')
 
             for folder in folders:
+                log.write('Working with folder {}\n'.format(folder))
+
                 prefix = folder + '_'
 
                 genome = Genome(GENOMES_DIR+folder, prefix)
@@ -23,8 +27,12 @@ def create_proteome():
                 genome.read_feature_table()
                 genome.set_gene_positions()
 
+                if genome.raised_errors:
+                    log.write('Error:\n{}\n'.format(genome.log))
+
                 for gene in genome.genes:
                     proteome.write(gene.get_fasta(join_genome_to_name=True))
                     genes_info.write('{gene}[genome: {genome}]\t{info}'.format(gene=gene.id,
                                                                                genome=gene.genome,
                                                                                info=gene.info))
+    log.close()

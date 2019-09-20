@@ -17,7 +17,7 @@ def create_proteome():
 
     with open(PROTEOME_PATH, 'a') as proteome:
         with open(GENES_INFO_PATH, 'a') as genes_info:
-            genes_info.write('gene\tgenome\tinfo')
+            genes_info.write('gene\tgenome\tinfo\n')
 
             for folder in tqdm(folders):
                 log.write('Working with folder {}\n'.format(folder))
@@ -35,7 +35,7 @@ def create_proteome():
 
                 for gene in genome.genes:
                     proteome.write(gene.get_fasta(join_genome_to_name=True))
-                    genes_info.write('{gene}[genome: {genome}]\t{info}'.format(gene=gene.id,
-                                                                               genome=gene.genome,
-                                                                               info=gene.info))
+                    genes_info.write('{gene}[genome: {genome}]\t{info}\n'.format(gene=gene.id,
+                                                                                 genome=gene.genome,
+                                                                                 info=gene.info))
     log.close()

@@ -2,13 +2,14 @@ EMAIL = 'vladimirs@intern.bii.a-star.edu.sg'
 
 FTP_LINK = 'ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/bacteria/'
 
+CD_HIT_PATH = 'cd-hit'  # path to a tool iteself. If it is not in $PATH variable, please, set it
+
 ORGANISM = 'Escherichia_coli'  # TODO: make a parameter to generalize the pipeline
 REFERENCE = 'GCF_000005845.2_ASM584v2'
 
 DB_PATH = './blast_db/'
 GENOMES_DIR = './data/'
 TEMP_PATH = './temp'
-CD_HIT_PATH = 'cd-hit'
 PROTEOME_PATH = './data/proteome.faa'
 GENES_INFO_PATH = './data/genes_info.tsv'
 CLUSTERS_INFO = './data/cluster_info.json'

@@ -22,13 +22,14 @@ def create_proteome():
 
                 prefix = folder + '_'
 
-                genome = Genome(GENOMES_DIR+folder, prefix)
+                genome = Genome(GENOMES_DIR+folder+'/', prefix)
                 genome.read_protein_faa()
                 genome.read_feature_table()
                 genome.set_gene_positions()
 
                 if genome.raised_errors:
                     log.write('Error:\n{}\n'.format(genome.log))
+                    log.write('Genome: {}\n'.format(str(genome)))
 
                 for gene in genome.genes:
                     proteome.write(gene.get_fasta(join_genome_to_name=True))

@@ -12,4 +12,4 @@ def perform_cd_hit_clustering(threshold):
               + ' -n 5 -d 0 -T 7 -M 4096'
               + ' -c {}'.format(threshold / 100))
 
-    return read_cd_hit_output('cd_hit_output.clstr')
+    return read_cd_hit_output('./cd_hit/cd_hit_output.clstr')

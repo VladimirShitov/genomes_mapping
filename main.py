@@ -3,7 +3,7 @@ from functions.download_genomes import download_genomes
 from functions.create_proteome import create_proteome
 from functions.create_total_list_of_genes import create_total_list_of_genes
 
-from constants import LOG_PATH, DOWNLOADING_LOG, TOTAL_LIST_LOG
+from constants import LOG_PATH, DOWNLOADING_LOG, TOTAL_LIST_LOG, PROTEOME_LOG
 
 set_enviroment()
 log = open(LOG_PATH, 'w', buffering=1)
@@ -15,7 +15,7 @@ except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))
 
 try:
-    log.write('Trying to create proteome\n')
+    log.write('Trying to create proteome. More information in {}\n'.format(PROTEOME_LOG))
     create_proteome()
 except Exception as e:
     log.write('Error happened:\n{}\n'.format(e))

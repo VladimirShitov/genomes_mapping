@@ -35,7 +35,7 @@ def create_proteome():
 
                 for gene in genome.genes:
                     proteome.write(gene.get_fasta(join_genome_to_name=True))
-                    genes_info.write('{gene}[genome: {genome}]\t{info}\n'.format(gene=gene.id,
+                    genes_info.write('{gene}[genome:{genome}]\t{info}\n'.format(gene=gene.id,
                                                                                  genome=gene.genome,
                                                                                  info=gene.info))
     log.close()

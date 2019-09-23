@@ -24,10 +24,9 @@ def create_total_list_of_genes():  # TODO: document
     clusters_info = {}
     for cluster in clusters:
         all_info = Counter(clusters_df[clusters_df['cluster'] == cluster]['info'])
-        cluster_info = all_info.most_common(1)[0][0]  # The name of most common element
-        clusters_info[cluster] = cluster_info
+        clusters_info[cluster] = all_info
 
-    with open(CLUSTERS_INFO, 'w') as f:
+    with open(CLUSTERS_INFO, 'w') as f:  # Write all the info about clusters in .json file
         json.dump(clusters_info, f)
 
     genomes = list(set(clusters_df['genome']))

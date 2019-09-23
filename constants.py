@@ -15,6 +15,8 @@ GENES_INFO_PATH = './data/genes_info.tsv'
 CLUSTERS_INFO = './data/cluster_info.json'
 TOTAL_LIST_PATH = './data/total_list.csv'  # TODO: maybe it is better to create a separate folder for results
 
+SUMMARY = './summary.txt'
+
 LOG_PATH = './logs/pipeline.log'
 DOWNLOADING_LOG = './logs/downloading.log'
 DB_LOG = './logs/database.log'

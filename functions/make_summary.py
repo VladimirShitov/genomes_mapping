@@ -35,7 +35,7 @@ def make_summary():
 
     # Plot matrix of genes presence
     plt.figure(figsize=(25, 5), dpi=300)
-    sns.heatmap((df > 0), cbar=False) # 1 if genome has a gene, 0 otherwise
+    sns.heatmap((df > 0), cbar=False)  # 1 if genome has a gene, 0 otherwise
     plt.savefig('./plots/genes_presence.png', bbox_inches='tight')
 
     # Plot distribution of number of clusters in genomes
@@ -73,4 +73,3 @@ def make_summary():
     plt.savefig('./plots/genes_presence_clustering.png', bbox_inches='tight')
 
     summary.close()
-

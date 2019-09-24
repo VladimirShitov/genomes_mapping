@@ -25,7 +25,10 @@ def make_summary():
     plt.xlabel('Size threshold')
     plt.ylabel('Number of clusters')
     plt.grid()
-    plt.savefig('./plots/n_clusters_by_threshold.png')
+    plt.savefig('./plots/n_clusters_by_threshold.png', bbox_inches='tight')
+    plt.clf()
+    plt.cla()
+    plt.close()
 
     good_cols = np.array([col for col in df.columns if (df[col] > 0).sum() > 5])
     summary.write('There are {} clusters of size > 5\n'.format(len(good_cols)))
@@ -37,6 +40,9 @@ def make_summary():
     plt.figure(figsize=(25, 5), dpi=300)
     sns.heatmap((df > 0), cbar=False)  # 1 if genome has a gene, 0 otherwise
     plt.savefig('./plots/genes_presence.png', bbox_inches='tight')
+    plt.clf()
+    plt.cla()
+    plt.close()
 
     # Plot distribution of number of clusters in genomes
     genes_in_genome = np.array([(df.T[col] > 0).sum() for col in df.T.columns])  # TODO: this seems to be stupid
@@ -44,7 +50,10 @@ def make_summary():
     plt.title('Distribution of number of genes in genomes')
     plt.xlabel('Number of clusters')
     plt.ylabel('Number of genomes')
-    plt.savefig('./plots/clusters_in_genome.png')
+    plt.savefig('./plots/clusters_in_genome.png', bbox_inches='tight')
+    plt.clf()
+    plt.cla()
+    plt.close()
 
     # Plot distribution of genes in clusters
     genes_in_cluster = {}
@@ -66,6 +75,9 @@ def make_summary():
     plt.title('Distribution of the sizes of clusters with size > 5')
     plt.xlabel('Number of genes')
     plt.ylabel('Number of clusters')
+    plt.clf()
+    plt.cla()
+    plt.close()
 
     # Plot clustermap
     plt.figure(figsize=(25, 5), dpi=300)

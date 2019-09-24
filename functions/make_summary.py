@@ -20,7 +20,7 @@ def make_summary():
         good_cols = (col_sums > t).sum()
         n_good_cols[t] = good_cols
 
-    plt.plot(n_good_cols.keys(), n_good_cols.values(), 'r-')
+    plt.plot(list(n_good_cols.keys()), list(n_good_cols.values()), 'r-')
     plt.title('Number of clusters by size threshold')
     plt.xlabel('Size threshold')
     plt.ylabel('Number of clusters')

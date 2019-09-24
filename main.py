@@ -12,26 +12,14 @@ log = open(LOG_PATH, 'w', buffering=1)
 try:
     log.write('Downloading genomes. More details in {}\n'.format(DOWNLOADING_LOG))
     download_genomes()
-except Exception as e:
-    log.write('Error happened:\n{}\n'.format(e))
 
-try:
     log.write('Trying to create proteome. More information in {}\n'.format(PROTEOME_LOG))
     create_proteome()
-except Exception as e:
-    log.write('Error happened:\n{}\n'.format(e))
 
-try:
     log.write('Trying to create total list of genes. More information in {}\n'.format(TOTAL_LIST_LOG))
     create_total_list_of_genes()
-except Exception as e:
-    log.write('Error happened:\n{}\n'.format(e))
 
-try:
     log.write('Making summary\n')
     make_summary()
-except Exception as e:
-    log.write('Error happened:\n{}\n'.format(e))
-
-
-log.close()
+finally:
+    log.close()

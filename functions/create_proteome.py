@@ -23,6 +23,14 @@ def create_proteome():
                 log.write('Working with folder {}\n'.format(folder))
 
                 prefix = folder + '_'
+                has_feature_table = (prefix + 'feature_table.txt') in os.listdir(GENOMES_DIR + folder)
+                has_protein_faa = (prefix + 'protein.faa') in os.listdir(GENOMES_DIR + folder)
+
+                # Delete folder with genome if it doen't have feature_table or protein_faa
+                if not (has_feature_table and has_protein_faa):
+                    log.write('Deleting {}\n'.format(GENOMES_DIR + folder))
+                    os.system('rm -rf {}'.format(GENOMES_DIR + folder))
+                    continue
 
                 genome = Genome(GENOMES_DIR+folder+'/', prefix)
                 genome.read_protein_faa()

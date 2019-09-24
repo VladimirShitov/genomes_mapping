@@ -10,13 +10,12 @@ REFERENCE = 'GCF_000005845.2_ASM584v2'
 DB_PATH = './blast_db/'
 GENOMES_DIR = './data/'
 TEMP_PATH = './temp'
-PROTEOME_PATH = './data/proteome.faa'
-GENES_INFO_PATH = './data/genes_info.tsv'
-CLUSTERS_INFO = './data/cluster_info.json'
-TOTAL_LIST_PATH = './data/total_list.csv'  # TODO: maybe it is better to create a separate folder for results
-CLUSTERS_DF_PATH = './data/clusters.df'
-
-SUMMARY = './summary.txt'
+PROTEOME_PATH = './results/proteome.faa'
+GENES_INFO_PATH = './results/genes_info.tsv'
+CLUSTERS_INFO = './results/cluster_info.json'
+TOTAL_LIST_PATH = './results/total_list.csv'  # TODO: maybe it is better to create a separate folder for results
+CLUSTERS_DF_PATH = './results/clusters.csv'
+SUMMARY = './results/summary.txt'
 
 LOG_PATH = './logs/pipeline.log'
 DOWNLOADING_LOG = './logs/downloading.log'

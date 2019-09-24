@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from functions.perform_cd_hit_clustering import perform_cd_hit_clustering
-from constants import THRESHOLD, CLUSTERS_INFO, TEMP_PATH, TOTAL_LIST_PATH, TOTAL_LIST_LOG
+from constants import THRESHOLD, CLUSTERS_INFO, TEMP_PATH, TOTAL_LIST_PATH, TOTAL_LIST_LOG, CLUSTERS_DF_PATH
 
 
 def create_total_list_of_genes():  # TODO: document
@@ -18,6 +18,7 @@ def create_total_list_of_genes():  # TODO: document
     log.write('Performing CD-hit clustering\n')
     clusters_df = perform_cd_hit_clustering(THRESHOLD)
     log.write('Done. Shape of a dataframe: {}'.format(clusters_df.shape))
+    clusters_df.to_csv(CLUSTERS_DF_PATH)
 
     clusters = set(clusters_df['cluster'])
 

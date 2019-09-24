@@ -14,6 +14,7 @@ PROTEOME_PATH = './data/proteome.faa'
 GENES_INFO_PATH = './data/genes_info.tsv'
 CLUSTERS_INFO = './data/cluster_info.json'
 TOTAL_LIST_PATH = './data/total_list.csv'  # TODO: maybe it is better to create a separate folder for results
+CLUSTERS_DF_PATH = './data/clusters.df'
 
 SUMMARY = './summary.txt'
 

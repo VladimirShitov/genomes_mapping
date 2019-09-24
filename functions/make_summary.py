@@ -11,7 +11,7 @@ def make_summary():
     summary = open(SUMMARY, 'w')
 
     df = pd.read_csv(TOTAL_LIST_PATH, index_col='gene').T
-    summary.write('Total list has {} clusters and {} genomes\n'.format(df.shape[0], df.shape[1]))
+    summary.write('Total list has {} genomes and {} clusters\n'.format(df.shape[0], df.shape[1]))
 
     # Plot of number of clusters by size threshold
     n_good_cols = {}

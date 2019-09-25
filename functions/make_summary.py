@@ -75,6 +75,7 @@ def make_summary():
     plt.title('Distribution of the sizes of clusters with size > 5')
     plt.xlabel('Number of genes')
     plt.ylabel('Number of clusters')
+    plt.savefig('./plots/clusters_sizes.png', bbox_inches='tight')
     plt.clf()
     plt.cla()
     plt.close()

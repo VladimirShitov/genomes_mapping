@@ -1,6 +1,6 @@
+dominate
 numpy
 seaborn
 pandas
-biopython
 tqdm
 matplotlib

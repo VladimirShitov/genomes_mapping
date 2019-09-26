@@ -13,7 +13,7 @@ TEMP_PATH = './temp'
 PROTEOME_PATH = './results/proteome.faa'
 GENES_INFO_PATH = './results/genes_info.tsv'
 CLUSTERS_INFO = './results/cluster_info.json'
-TOTAL_LIST_PATH = './results/total_list.csv'  # TODO: maybe it is better to create a separate folder for results
+TOTAL_LIST_PATH = './results/total_list.csv'
 CLUSTERS_DF_PATH = './results/clusters.csv'
 SUMMARY = './results/summary.txt'
 

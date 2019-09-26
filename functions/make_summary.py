@@ -1,17 +1,21 @@
+from sys import setrecursionlimit
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tqdm import tqdm
 
+from functions.create_html_summary import create_html_summary
+
 from constants import TOTAL_LIST_PATH, SUMMARY
 
 
 def make_summary():
-    summary = open(SUMMARY, 'w')
-
     df = pd.read_csv(TOTAL_LIST_PATH, index_col='gene').T
-    summary.write('Total list has {} genomes and {} clusters\n'.format(df.shape[0], df.shape[1]))
+
+    n_genomes = df.shape[0]
+    n_clusters = df.shape[1]
 
     # Plot of number of clusters by size threshold
     n_good_cols = {}
@@ -30,8 +34,33 @@ def make_summary():
     plt.cla()
     plt.close()
 
+    # Plot distribution of genes in clusters
+    genes_in_cluster = {}
+
+    for col in tqdm(df.columns):
+        number_of_genes = (df[col] > 0).sum()
+        genes_in_cluster[col] = number_of_genes
+    n_genes = np.array(list(genes_in_cluster.values()))
+
+    plt.figure(figsize=(10, 4))
+    plt.subplot(121)
+    sns.distplot(n_genes, kde=False)
+    plt.title('Distribution of the sizes of clusters')
+    plt.xlabel('Number of genes')
+    plt.ylabel('Number of clusters')
+
+    plt.subplot(122)
+    sns.distplot(n_genes[n_genes > 5], kde=False)
+    plt.title('Distribution of the sizes of clusters with size > 5')
+    plt.xlabel('Number of genes')
+    plt.ylabel('Number of clusters')
+    plt.savefig('./plots/clusters_sizes.png', bbox_inches='tight')
+    plt.clf()
+    plt.cla()
+    plt.close()
+
     good_cols = np.array([col for col in df.columns if (df[col] > 0).sum() > 5])
-    summary.write('There are {} clusters of size > 5\n'.format(len(good_cols)))
+    n_big_clusters = len(good_cols)
 
     # Clean df
     df = df[good_cols]
@@ -55,34 +84,13 @@ def make_summary():
     plt.cla()
     plt.close()
 
-    # Plot distribution of genes in clusters
-    genes_in_cluster = {}
+    setrecursionlimit(2500)  # This can kill your RAM a bit, but clustering of huge arrays is hard with default limit
+    try:
+        # Plot clustermap
+        plt.figure(figsize=(25, 5), dpi=300)
+        sns.clustermap((df > 0), metric='cityblock', cbar=False)
+        plt.savefig('./plots/genes_presence_clustering.png', bbox_inches='tight')
+    except RecursionError:
+        print('Clustering was not performed because of the recursion error')
 
-    for col in tqdm(df.columns):
-        number_of_genes = (df[col] > 0).sum()
-        genes_in_cluster[col] = number_of_genes
-    n_genes = np.array(list(genes_in_cluster.values()))
-
-    plt.figure(figsize=(10, 5))
-    plt.subplot(121)
-    sns.distplot(n_genes, kde=False)
-    plt.title('Distribution of the sizes of clusters')
-    plt.xlabel('Number of genes')
-    plt.ylabel('Number of clusters')
-
-    plt.subplot(122)
-    sns.distplot(n_genes[n_genes > 5], kde=False)
-    plt.title('Distribution of the sizes of clusters with size > 5')
-    plt.xlabel('Number of genes')
-    plt.ylabel('Number of clusters')
-    plt.savefig('./plots/clusters_sizes.png', bbox_inches='tight')
-    plt.clf()
-    plt.cla()
-    plt.close()
-
-    # Plot clustermap
-    plt.figure(figsize=(25, 5), dpi=300)
-    sns.clustermap((df > 0), metric='cityblock', cbar=False)
-    plt.savefig('./plots/genes_presence_clustering.png', bbox_inches='tight')
-
-    summary.close()
+    create_html_summary(n_genomes, n_clusters, n_big_clusters)

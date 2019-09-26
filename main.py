@@ -21,5 +21,6 @@ try:
 
     log.write('Making summary\n')
     make_summary()
+    log.write('All done!')
 finally:
     log.close()

@@ -97,7 +97,7 @@ MANLYDLKKFDLNLLVIFECIYQHLSISKAAESLYITPSAVSQSLQRLRAQFNDPLFIRSGKGIAPTTTGLNLHHHLEKN
 >WP_000002542.1[genome:GCF_002741575.1_ASM274157v1_]  MULTISPECIES: S26 family signal peptidase [Enterobacteriaceae] [start:2854078] [end:2855052] [genome:GCF_002741575.1_ASM274157v1_] 
 MANMFALILVIATLVTGILWCVDKFFFAPKRRERQAAAQAAAGDSLDKATLKKVAPKPGWLETGASVFPVLAIVLIVRSFIYEPFQIPSGSMMPTLLIGDFILVEKFAYGIKDPIYQKTLIETGHPKRGDIVVFKYPEDPKLDYIKRAVGLPGDKVTYDPVSKELTIQPGCSSGQACENALPVTYSNVEPSDFVQTFSRRNGGEATSGFFEVPKNETKENGIRLSERKETLGDVTHRILTVPIAQDQVGMYYQQPGQQLATWIVPPGQYFMMGDNRDNSADSRYWGFVPEANLVGRATAIWMSFDKQEGEWPTGVRLSRIGGIH
 ```
-Gene IDs are concatenated with genome IDs. It helps to distinguish genes with the same name after CD-hit clustering. Also information about start, end, and genome of eache gene is written in square brackets. File can be found in *./results/proteome.faa*.
+Gene IDs are concatenated with genome IDs. It helps to distinguish genes with the same name after CD-hit clustering. Also information about **start**, **end**, and **genome** of each gene is written in square brackets. File can be found in *./results/proteome.faa*.
 
 This function also creates *./results/genes_info.tsv* file. It is a tab-separated table with two columns: **gene** and **info**. Information is extracted from fasta files headers. For sequences above the file will look like this:
 ```

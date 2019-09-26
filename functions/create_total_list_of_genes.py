@@ -17,7 +17,7 @@ def create_total_list_of_genes():  # TODO: document
 
     log.write('Performing CD-hit clustering\n')
     clusters_df = perform_cd_hit_clustering(THRESHOLD)
-    log.write('Done. Shape of a dataframe: {}'.format(clusters_df.shape))
+    log.write('Done. Shape of a dataframe: {}\n'.format(clusters_df.shape))
     clusters_df.to_csv(CLUSTERS_DF_PATH)
 
     clusters = set(clusters_df['cluster'])
@@ -36,7 +36,7 @@ def create_total_list_of_genes():  # TODO: document
     total_list = pd.DataFrame(data=None, columns=COLS)
     temp_df = pd.DataFrame(data=None, columns=COLS)
 
-    log.write('Creating a total list')
+    log.write('Creating a total list\n')
     for i, cluster in enumerate(tqdm(clusters)):
         cluster_genomes = np.array(clusters_df[clusters_df['cluster'] == cluster]['genome'])
         genes_in_genome = defaultdict(int)
@@ -55,6 +55,6 @@ def create_total_list_of_genes():  # TODO: document
 
     total_list = pd.concat([total_list, temp_df], axis=0, ignore_index=True, sort=False)
     total_list.to_csv(TOTAL_LIST_PATH, index=False)
-    log.write('Done. Shape of the total list: {}'.format(total_list.shape))
+    log.write('Done. Shape of the total list: {}\n'.format(total_list.shape))
 
     log.close()

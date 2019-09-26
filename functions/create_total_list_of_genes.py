@@ -18,7 +18,7 @@ def create_total_list_of_genes():  # TODO: document
     log.write('Performing CD-hit clustering\n')
     clusters_df = perform_cd_hit_clustering(THRESHOLD)
     log.write('Done. Shape of a dataframe: {}\n'.format(clusters_df.shape))
-    clusters_df.to_csv(CLUSTERS_DF_PATH)
+    clusters_df.to_csv(CLUSTERS_DF_PATH, index=False)
 
     clusters = set(clusters_df['cluster'])
 

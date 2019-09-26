@@ -1,30 +1,26 @@
 from functions.set_enviroment import set_enviroment
 from functions.download_genomes import download_genomes
-from functions.create_db import create_database
-from functions.align_to_db import align_to_database
-import constants
+from functions.create_proteome import create_proteome
+from functions.create_total_list_of_genes import create_total_list_of_genes
+from functions.make_summary import make_summary
+
+from constants import LOG_PATH, DOWNLOADING_LOG, TOTAL_LIST_LOG, PROTEOME_LOG
 
 set_enviroment()
-log = open(constants.LOG_PATH, 'w', buffering=1)
+log = open(LOG_PATH, 'w', buffering=1)
 
 try:
-    log.write('Downloading genomes. More details in {}\n'.format(constants.DOWNLOADING_LOG))
+    log.write('Downloading genomes. More details in {}\n'.format(DOWNLOADING_LOG))
     download_genomes()
-except Exception as e:
-    log.write('Error happened:\n{}\n'.format(e))
 
-try:
-    log.write('Creating database. More details in {}\n'.format(constants.DB_LOG))
-    create_database()
-except Exception as e:
-    log.write('Error happened:\n{}\n'.format(e))
+    log.write('Trying to create proteome. More information in {}\n'.format(PROTEOME_LOG))
+    create_proteome()
 
-try:
-    log.write('Aligning genes to database. More details in {}\n'.format(constants.ALIGNMENT_LOG))
-    align_to_database()
-except Exception as e:
-    log.write('Error happened:\n{}\n'.format(e))
+    log.write('Trying to create total list of genes. More information in {}\n'.format(TOTAL_LIST_LOG))
+    create_total_list_of_genes()
 
-# build_graph()
-
-log.close()
+    log.write('Making summary\n')
+    make_summary()
+    log.write('All done!')
+finally:
+    log.close()

@@ -113,7 +113,7 @@ Information about the work process of the function is being written to *./logs/p
 
 This function does couple of things:
 
-1. Performs CD-hit clustering. Threshold can be changed by setting **THRESHOLD** constant in *./constants.py*. By default it is 90. CD-hit output files are being saved in *./cd_hit* folder. You don't have to look at them though, because they are being processed and saved in convenient form in *./results/clusters.csv*. This table contains following columns:
+1. Performs CD-hit clustering. Threshold can be changed by setting **THRESHOLD** constant in *./constants.py*. By default it is **90**. CD-hit output files are being saved in *./cd_hit* folder. You don't have to look at them though, because they are being processed and saved in convenient form in *./results/clusters.csv*. This table contains following columns:
     * **cluster** — cluster of a sequence
     * **representative** — boolean variable, which indicates, if the given sequence is representative in the cluster
     * **gene** — name of the sequence from fasta header with appended genome id

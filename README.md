@@ -83,6 +83,7 @@ the following files will be downloaded:
 * **feature_table.txt.gz** – contains information about genes, i.e, *start* and *end* in a genome.
 * **genomic.fna.gz** – complete nucleotide sequence of a genome.
 * **protein.gpff.gz** – protein sequence and annotation for each gene.
+
 Then all the files are extracted from their archives.
 
 Information about the work process of the function is being written to *./logs/downloading.log*.

@@ -15,9 +15,10 @@ Also, please install [cd-hit](https://github.com/weizhongli/cdhit/wiki/2.-Instal
 
 File main.py executes following scripts from *./functions/*:
 1. **set_enviroment.py**
-2. **create_proteome.py**
-3. **create_total_list_of_genes.py**
-4. **make_summary.py**
+2. **download_genomes.py**
+3. **create_proteome.py**
+4. **create_total_list_of_genes.py**
+5. **make_summary.py**
 
 All the steps, that take a lot of time have **tqdm** inside, so you can always see progress bar in your python console. 
 *main.py* writes result of it's work to a file *./logs/pipeline.log*. All the steps off the pipeline described below in details.

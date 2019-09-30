@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Genomes mapping summary</title>
+    <style>
+        body {
+            background-color: #e1f5fe;
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 15px 30px;
+        }
+        span {
+            font-weight: 600;
+        }
+        cite {
+            border-left: solid black 3px;
+            font-size: 12px;
+        }
+        .big_img {
+            width: 100%;
+        }
+        </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Creating the total list of genes for Escherichia_coli</h1>
+      <p>Total list has <span>1003 genomes</span> and <span>52115 clusters</span>.</p>
+      <img alt="clusters sizes" src="../plots/clusters_sizes.png">
+      <p>There are <span>19031 clusters</span> of <span>size > 5</span>.</p>
+      <img alt="N clusters by threshold" src="../plots/n_clusters_by_threshold.png">
+      <p>Check the <i>results/</i> folder for files, which you can use for the following analysis:</p>
+      <ul>
+        <li><i><b>proteome.faa</b></i> — fasta file with all the protein coding genes fromall the genomes. Gene names are concatenated with their genome ID. There is alsosome extra information in brackets. Example of the header:<br> <cite>>WP_000002298.1[genome:GCF_002741575.1_ASM274157v1_]  MULTISPECIES: alpha-D-ribose 1-methylphosphonate 5-phosphate C-P-lyase [Enterobacteriaceae] [start:4548948] [end:4549793] [genome:GCF_002741575.1_ASM274157v1_]</cite></li>
+        <li><i><b>genes_info.tsv</b></i> — tab separated table with 2 columns: <b>gene</b> and <b>info</b>. Contains information for each gene in the proteome. Information is extracted from fasta header.</li>
+        <li><i><b>cluster_info.json</b></i> — contains counted information about the genes in each cluster. You can use it to take a look at what genes the cluster consists of, and to set a name for the cluster. Here is the example of visualisation of this information for 1 cluster:</li>
+        <img src="../images/cluster_names.png">
+        <li><i><b>total_list.csv</b></i> — table with clusters in rows and genomes in columns. Number on the intersection means, how many genes from this cluster the genome contains.</li>
+        <li><i><b>clusters.csv</b></i> — data frame with following columns:
+          <ol>
+            <li><i>cluster</i> — cluster of a sequence</li>
+            <li><i>representative</i> — boolean variable, which indicates, if the given sequence is representative</li>
+            <li><i>gene</i> — name of the sequence from fasta header with appended genome ID</li>
+            <li><i>length</i> — length of the gene's sequence</li>
+            <li><i>identity</i> — identity of a sequence to representative sequence of its cluster</li>
+            <li><i>name</i> — name of the sequence from fasta header without appended genome ID</li>
+            <li><i>genome</i> — genome id from fasta header</li>
+            <li><i>info</i> — information about gene from its fasta header</li>
+          </ol>
+        </li>
+      </ul>
+      <p>Visualisation of the total list of genes. Each row represents a genome. Each column represents a cluster (only clusters with <b>size > 5</b> included). If the genome has the gene, there is a white dot on the intersection. Otherwise — a black dot.</p>
+      <img alt="genes presence" class="big_img" src="../plots/genes_presence.png">
+      <p>Clustering of genes. These illustrations are for you to take a look at the data. For higher quality illustrations, and the following analysis it is recommended to perform these operations in <a href="https://software.broadinstitute.org/morpheus/">Morpheus tool</a> (also avialable as <a href="https://github.com/cmap/morpheus.R">R package</a>).</p>
+      <img alt="genes presence clustering" src="../plots/genes_presence_clustering.png">
+      <p>If you had any problems during the work of the program, or have any notes, please contact <a href="mailto:vladimirshitov98@gmail.com">vladimirshitov98@gmail.com</a></p>
+    </div>
+  </body>
+</html>
